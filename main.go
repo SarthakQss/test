@@ -1,18 +1,43 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"golang.org/x/crypto/"
-	"github.com/sarthak/user/userdetail"
-)
+import "fmt"
+
+type User interface {
+	getUserInfo() string
+	
+}
+
+type StudentInfo struct{
+	Fname string
+	LName string
+}
+type TeacherInfo struct{
+	Fname string
+	
+}
 
 func main() {
+	SI := StudentInfo{
+		Fname: "Sarthak",
+		LName: "Pruthi",
+	}
+	TI := TeacherInfo{
+		Fname: "Qss Technosoft",
+	}
 
-	//Name:=person{"Sarthak","Pruthi"}
-	fmt.Println(userdetail.TestName())
+	getUserInfo(SI)
+	getUserInfo(TI)
+}
 
-	log.Print("Hello this is log")
+func getUserInfo(b User) {
+	fmt.Println(b.getUserInfo())
+}
 
-	bcrypt.
+func (StudentInfo) getUserInfo() string {
+	
+	return "Student"
+}
+
+func (TeacherInfo) getUserInfo() string {
+	return "Teacher"
 }
