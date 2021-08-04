@@ -1,31 +1,36 @@
-// package main
+package main
 
-// import "fmt"
+import "fmt"
 
-// type bot interface {
-// 	getGreeting() string
-// }
+type contactInfo struct {
+	email   string
+	zipCode int
+}
 
-// type englishBot struct{}
-// type spanishBot struct{}
+type person struct {
+	firstName string
+	lastName  string
+	contactInfo
+}
 
-// func main() {
-// 	eb := englishBot{}
-// 	sb := spanishBot{}
+func main() {
+	Name := person{
+		firstName: "Pruthi",
+		lastName:  "Qss",
+		contactInfo: contactInfo{
+			email:   "Sarthak@gmail.com",
+			zipCode: 136118,
+		},
+	}
 
-// 	printGreeting(eb)
-// 	printGreeting(sb)
-// }
+	Name.updateName("Sarthak")
+	Name.print()
+}
 
-// func printGreeting(b bot) {
-// 	fmt.Println(b.getGreeting())
-// }
+func (pointerToPerson *person) updateName(newFirstName string) {
+	(*pointerToPerson).firstName = newFirstName
+}
 
-// func (englishBot) getGreeting() string {
-// 	// VERY custom logic for generating an english greeting
-// 	return "Hi there!"
-// }
-
-// func (spanishBot) getGreeting() string {
-// 	return "Hola!"
-// }
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
