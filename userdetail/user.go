@@ -1,36 +1,43 @@
-package main
+package userdetail
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type contactInfo struct {
-	email   string
-	zipCode int
+type StudentInfo struct {
+	Id          int
+	Fname       string
+	Lname       string
+	IsActive    bool
+	ContactInfo int
+	//	DOB         time.Time
 }
 
-type person struct {
-	firstName string
-	lastName  string
-	contactInfo
+type StudentList struct {
+	Data []StudentInfo
 }
 
-func main() {
-	Name := person{
-		firstName: "Pruthi",
-		lastName:  "Qss",
-		contactInfo: contactInfo{
-			email:   "Sarthak@gmail.com",
-			zipCode: 136118,
-		},
-	}
+func (d StudentInfo) AddUser() StudentList {
 
-	Name.updateName("Sarthak")
-	Name.print()
+	userInfos := StudentList{}
+
+	userInfos.Data = append(userInfos.Data, d)
+
+	return userInfos
+
 }
 
-func (pointerToPerson *person) updateName(newFirstName string) {
-	(*pointerToPerson).firstName = newFirstName
+func (d StudentInfo) GetUserAllDetail() {
+	fmt.Println(d)
+
 }
 
-func (p person) print() {
-	fmt.Printf("%+v", p)
+func (pointerToPerson *StudentInfo) UpdateUserName(newFirstName string) {
+	(*pointerToPerson).Fname = newFirstName
+}
+
+func (d StudentInfo) GetUserUpdatedDetails() {
+	fmt.Println("Updated User First Name")
+	fmt.Println("First Name: " + d.Fname + " Last Name : " + d.Lname)
+
 }

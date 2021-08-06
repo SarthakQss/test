@@ -1,43 +1,70 @@
 package main
 
-import "fmt"
-
-type User interface {
-	getUserInfo() string
-	
-}
-
-type StudentInfo struct{
-	Fname string
-	LName string
-}
-type TeacherInfo struct{
-	Fname string
-	
-}
+import (
+	"fmt"
+	"bufio"
+	"os"
+	"github.com/sarthak/user/userdetail"
+)
 
 func main() {
-	SI := StudentInfo{
+
+	StudentInfo1 := userdetail.StudentInfo{
+		Id:    1,
 		Fname: "Sarthak",
-		LName: "Pruthi",
+		Lname: "Pruthi",
+		IsActive  :  true,
+		ContactInfo : 9671850070,
 	}
-	TI := TeacherInfo{
-		Fname: "Qss Technosoft",
+
+	StudentInfo2 := userdetail.StudentInfo{
+		Id:          2,
+		Fname:       "Aman",
+		Lname:       "Pruthi",
+		 IsActive  :  true,
+		 ContactInfo : 9671850070,
 	}
 
-	getUserInfo(SI)
-	getUserInfo(TI)
-}
-
-func getUserInfo(b User) {
-	fmt.Println(b.getUserInfo())
-}
-
-func (StudentInfo) getUserInfo() string {
+	fmt.Println(StudentInfo1.AddUser())
+	fmt.Println(StudentInfo2.AddUser())
 	
-	return "Student"
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Update your First Name for first User")
+
+	newUserName, _ := reader.ReadString('\n')
+	StudentInfo1.Fname=newUserName;
+	StudentInfo1.GetUserUpdatedDetails()
+
+	reader1 := bufio.NewReader(os.Stdin)
+	fmt.Println("Update your First Name for Second User")
+
+	newUserName2, _ := reader1.ReadString('\n')
+	StudentInfo2.Fname=newUserName2;
+	StudentInfo2.GetUserUpdatedDetails()
+
+	fmt.Println("Enter the User id you want to search for")
+
+	var i int;
+	_, err := fmt.Scanf("%d", &i)
+	if err != nil {
+		fmt.Println(err)
+	 }
+
+	
+if i == StudentInfo1.Id {
+	fmt.Println("user match with user id " ,i)
+	StudentInfo1.GetUserAllDetail()
+}else if i == StudentInfo2.Id {
+	fmt.Println("user match with user id " ,i)
+	StudentInfo2.GetUserAllDetail()
+}else{
+	fmt.Println("id is not match")
 }
 
-func (TeacherInfo) getUserInfo() string {
-	return "Teacher"
+
+fmt.Println("Enter the User id you want to delete")
+
+
+
+
 }
